@@ -47,11 +47,13 @@ export const userSlice = createSlice({
     builder.addCase(sendSocialData.pending, (state) => {
       state.loading = true;
     });
+
     builder.addCase(sendSocialData.fulfilled, (state, action) => {
       const socialData = action.payload;
       state.socialData = socialData;
       state.loading = false;
     });
+
     builder.addCase(sendSocialData.rejected, (state) => {
       state.loading = false;
       // state.errors = action.payload;

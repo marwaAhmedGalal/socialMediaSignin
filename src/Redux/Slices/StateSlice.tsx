@@ -3,12 +3,12 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../Store/Store";
 // Define a type for the slice state
 interface UserMode {
-  role:string
+  role: string;
 }
 
 // Define the initial state using that type
 const initialState: UserMode = {
-    role:""
+  role: "",
 };
 
 export const stateSlice = createSlice({
@@ -17,9 +17,8 @@ export const stateSlice = createSlice({
   initialState,
   reducers: {
     stateStatus: (state, action: PayloadAction<any>) => {
-     state.role=action.payload 
+      state.role = action.payload;
     },
- 
   },
 });
 

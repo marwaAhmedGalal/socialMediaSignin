@@ -1,8 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { counterSlice } from "../Slices/CounterSlice";
 import { userSlice } from "../Slices/UserSlice";
-import {stateSlice} from "../Slices/stateSlice";
-
 
 // ...
 
@@ -10,7 +8,6 @@ export const store = configureStore({
   reducer: {
     counter: counterSlice.reducer,
     user: userSlice.reducer,
-    mode:stateSlice.reducer
   },
 });
 
