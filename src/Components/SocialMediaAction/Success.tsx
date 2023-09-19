@@ -1,34 +1,38 @@
-import { memo,useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { sendSocialData } from "../../Redux/Slices/UserSlice";
+import { sendSocialData, userData } from "../../Redux/Slices/UserSlice";
 import { Alert, Spin } from "antd";
+import { useAppDispatch, useAppSelector } from "../../Hooks/ReduxHook";
 
-const Success : React.FC = () => {
+const Success: React.FC = () => {
   const [searchParams] = useSearchParams();
   const username = searchParams.get("username");
   const code = searchParams.get("code");
-  const { loading } = useSelector((state) => state.user);
+  const socialData = { username: username, code: code };
+  const { loading } = useAppSelector(userData);
   const [isFirst, setIsFirst] = useState(true);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     if (isFirst) {
       setIsFirst(false);
-      console.log(username, code);
-        dispatch(sendSocialData(username));
+      // console.log(socialData);
+      dispatch(sendSocialData(socialData));
     }
-    // if (serverToekn != null) {
-    //   navigate('/');
-    // }
   }, [dispatch, isFirst, loading]);
-  return <>{loading ? <Spin/> : 
-    <Alert
-  message="Success Text"
-  description="Success Description Success Description Success Description"
-  type="success"
-/>
-}</>;
-}
+  return (
+    <>
+      {loading ? (
+        <Spin />
+      ) : (
+        <Alert
+          message="Success Text"
+          description="Success Description Success Description Success Description"
+          type="success"
+        />
+      )}
+    </>
+  );
+};
 
-export default memo(Success);
+export default Success;

@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // get data by getServerSideProps
-const url = "https://c7de-156-218-126-180.ngrok-free.app";
+const url = "http://192.168.90.164:8000";
 
 const defaultOptions = {
   baseURL: `${url}/api/`,

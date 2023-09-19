@@ -5,29 +5,34 @@ import axios_common from "../../Services/api";
 
 // Define a type for the slice state
 interface UserState {
-
-  errors: any;
+  errors: string;
   loading: boolean;
-  socialUserName: string
+  socialData: {
+    userName: string;
+    code: string;
+  };
 }
 
 // Define the initial state using that type
 const initialState: UserState = {
   errors: "",
   loading: false,
-  socialUserName: ""
+  socialData: {
+    userName: "",
+    code: "",
+  },
 };
 
 export const sendSocialData = createAsyncThunk(
   "user/sendSocialData",
-  async (socialUserName, thunkAPI) => {
-    
-    await axios_common({
-      url: "register/google",
-      method: "POST",
-    })
-      .then((data) => console.log(data))
-      .catch((error) => console.log(error));
+  async (socialData, thunkAPI) => {
+    const { rejectWithValue } = thunkAPI;
+    try {
+      const data = await axios_common.post(`register/google`, socialData);
+      return data;
+    } catch (error) {
+      return console.log(rejectWithValue(error));
+    }
   }
 );
 
@@ -39,18 +44,17 @@ export const userSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(sendSocialData.pending, (state, action) => {
+    builder.addCase(sendSocialData.pending, (state) => {
       state.loading = true;
     });
     builder.addCase(sendSocialData.fulfilled, (state, action) => {
-  
-      const socialUserName = action.payload;
-      state.socialUserName = socialUserName;
+      const socialData = action.payload;
+      state.socialData = socialData;
       state.loading = false;
     });
-    builder.addCase(sendSocialData.rejected, (state, action) => {
+    builder.addCase(sendSocialData.rejected, (state) => {
       state.loading = false;
-      state.errors = action.payload;
+      // state.errors = action.payload;
     });
   },
 });

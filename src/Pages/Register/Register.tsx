@@ -51,7 +51,7 @@ export default function Register() {
     password: "",
     password_confirmation: "",
   };
-  let formik = useFormik({
+  const formik = useFormik({
     initialValues: initialValues,
     validationSchema: SignupSchema,
     onSubmit: handleSubmit,

@@ -16,11 +16,16 @@ import Failed from "./Components/SocialMediaAction/Failed.tsx";
 
 const router = createHashRouter([
   {
+    path: "https://www.google.com/?username&code",
+    element: <Success />,
+  },
+  {
     path: "/",
     element: <Root />,
     errorElement: <NotFound />,
     children: [
       // Elements that need Nav and Footer
+
       {
         element: <HomeLayout />,
         children: [
@@ -35,10 +40,6 @@ const router = createHashRouter([
         path: "login",
         element: <Login />,
         children: [
-          {
-            path: "success/",
-            element: <Success />,
-          },
           {
             path: "failed/",
             element: <Failed />,
