@@ -1,34 +1,28 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-// import type { PayloadAction } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../Store/Store";
 import axios_common from "../../Services/api";
-
-// Define a type for the slice state
-interface UserState {
-  errors: string;
-  loading: boolean;
-  socialData: {
-    userName: string;
-    code: string;
-  };
+export interface User {
+  username: string;
+  code: string;
 }
-
-// Define the initial state using that type
+export interface UserState {
+  loading: boolean;
+  socialLoginData: User;
+  error: string | undefined;
+}
 const initialState: UserState = {
-  errors: "",
   loading: false,
-  socialData: {
-    userName: "",
+  socialLoginData: {
     code: "",
+    username: "",
   },
+  error: undefined,
 };
-
-export const sendSocialData = createAsyncThunk(
-  "user/sendSocialData",
-  async (socialData, thunkAPI) => {
-    const { rejectWithValue } = thunkAPI;
+export const fetchUsers = createAsyncThunk(
+  "auth/signin",
+  async (scialData: User, { rejectWithValue }) => {
     try {
-      const data = await axios_common.post(`register/google`, socialData);
+      const { data } = await axios_common.post(`register/google`, scialData);
       return data;
     } catch (error) {
       return console.log(rejectWithValue(error));
@@ -36,34 +30,32 @@ export const sendSocialData = createAsyncThunk(
   }
 );
 
-// Define the initial state using that type
-
 export const userSlice = createSlice({
-  name: "user",
-  // `createSlice` will infer the state type from the `initialState` argument
+  name: "users",
   initialState,
-  reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(sendSocialData.pending, (state) => {
+    builder.addCase(fetchUsers.pending, (state) => {
       state.loading = true;
     });
-
-    builder.addCase(sendSocialData.fulfilled, (state, action) => {
-      const socialData = action.payload;
-      state.socialData = socialData;
+    builder.addCase(
+      fetchUsers.fulfilled,
+      (state, action: PayloadAction<User>) => {
+        state.loading = false;
+        state.socialLoginData = action.payload;
+      }
+    );
+    builder.addCase(fetchUsers.rejected, (state, action) => {
       state.loading = false;
-    });
-
-    builder.addCase(sendSocialData.rejected, (state) => {
-      state.loading = false;
-      // state.errors = action.payload;
+      state.socialLoginData = {
+        code: "",
+        username: "",
+      };
+      state.error = action.error.message;
     });
   },
+  reducers: {},
 });
 
-// export const { login } = userSlice.actions;
-
-// Other code such as selectors can use the imported `RootState` type
 export const userData = (state: RootState) => state.user;
 
 export default userSlice.reducer;
