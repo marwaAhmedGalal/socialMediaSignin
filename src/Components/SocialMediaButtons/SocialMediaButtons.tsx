@@ -8,7 +8,7 @@ function SocialMediaButtons({ formType }: { formType: string }) {
       <div className={`d-flex align-items-center flex-column gap-2`}>
         <Button
           className={styles.google}
-          href={`https://2901-41-34-42-56.ngrok-free.app/api/${formType}/google`}
+          href={`http://192.168.90.164:8000/api/${formType}/google`}
           icon={
             <img
               src="/public/images/googleicon.png"
@@ -22,7 +22,7 @@ function SocialMediaButtons({ formType }: { formType: string }) {
 
         <Button
           className={styles.google}
-          href={`https://2901-41-34-42-56.ngrok-free.app/api/${formType}/facebook`}
+          href={`http://192.168.90.164:8000/api/${formType}/facebook`}
           icon={
             <img
               src="/public/images/facebookicon.png"
