@@ -2,7 +2,7 @@ import ReactDOM from "react-dom/client";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle";
 import "./index.css";
-import { RouterProvider, createHashRouter } from "react-router-dom";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Root from "./Pages/Root.tsx";
 import Counter from "./Components/Counter.tsx";
 import Home from "./Pages/Home/Home.tsx";
@@ -12,7 +12,7 @@ import HomeLayout from "./Components/Layouts/HomeLayout.tsx";
 import Success from "./Components/SocialMediaAction/Success.tsx";
 import Failed from "./Components/SocialMediaAction/Failed.tsx";
 
-const router = createHashRouter([
+const router = createBrowserRouter([
   {
     path: "/",
     element: <Root />,
