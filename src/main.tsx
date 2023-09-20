@@ -18,7 +18,7 @@ const router = createBrowserRouter([
     element: <Root />,
     errorElement: <NotFound />,
     loader: async () => {
-      const res = await fetch("http://192.168.90.164:8000/api/profile/mostafamahmoud055/2");
+      const res = await fetch("https://192.168.90.164:8000/api/profile/mostafamahmoud055/2");
       const data = await res.json()
       console.log("this data from loader", res, data);
       return null
