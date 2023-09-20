@@ -8,7 +8,7 @@ const Success: React.FC = () => {
   const [searchParams] = useSearchParams();
   const username = searchParams.get("username");
   const code = searchParams.get("code");
-
+  console.log(code, username);
   const [users] = useState<User>({
     username: username || "",
     code: code || "",
@@ -21,8 +21,8 @@ const Success: React.FC = () => {
   useEffect(() => {
     if (isFirst) {
       setIsFirst(false);
-      // console.log(socialData);
-      // setUsers(users);
+      console.log(users);
+
       dispatch(fetchUsers(users));
     }
   }, [dispatch, isFirst, users]);
