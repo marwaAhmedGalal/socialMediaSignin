@@ -35,11 +35,11 @@ const router = createHashRouter([
         element: <Login />,
         children: [
           {
-            path: "success",
+            path: "success/?username&code",
             element: <Success />,
           },
           {
-            path: "failed/",
+            path: "failed",
             element: <Failed />,
           },
         ],
