@@ -2,6 +2,7 @@
 import React from "react";
 import SocialMediaButtons from "../../Components/SocialMediaButtons/SocialMediaButtons";
 import axios_common from "../../Services/api";
+import { Outlet } from "react-router-dom";
 
 const Login: React.FC = () => {
   return (
@@ -10,6 +11,7 @@ const Login: React.FC = () => {
       <div>
         <h1>My Example</h1>
         <SocialMediaButtons formType={"login"} />
+        <Outlet />
       </div>
     )
   );
