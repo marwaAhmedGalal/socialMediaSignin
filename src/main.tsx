@@ -35,7 +35,7 @@ const router = createBrowserRouter([
         element: <Login />,
         children: [
           {
-            path: "success/?username&code",
+            path: "success/",
             element: <Success />,
           },
           {
