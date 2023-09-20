@@ -22,7 +22,7 @@ export const fetchUsers = createAsyncThunk(
   "auth/signin",
   async (scialData: User, { rejectWithValue }) => {
     try {
-      const { data } = await axios_common.post(`register/google`, scialData);
+      const { data } = await axios_common.post(`social-auth/google`, scialData);
       return data;
     } catch (error) {
       return console.log(rejectWithValue(error));
