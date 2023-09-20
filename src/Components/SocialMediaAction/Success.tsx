@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { User, userData, fetchUsers } from "../../Redux/Slices/UserSlice";
+import { socialUser, User, fetchUsers } from "../../Redux/Slices/UserSlice";
 import { Alert, Spin } from "antd";
 import { useAppDispatch, useAppSelector } from "../../Hooks/ReduxHook";
 
@@ -8,24 +8,24 @@ const Success: React.FC = () => {
   const [searchParams] = useSearchParams();
   const username = searchParams.get("username");
   const code = searchParams.get("code");
-  console.log(code, username);
-  const [users] = useState<User>({
+
+  const [user] = useState<socialUser>({
     username: username || "",
     code: code || "",
   });
 
-  const { loading } = useAppSelector(userData);
+  const { loading } = useAppSelector(User);
   const [isFirst, setIsFirst] = useState(true);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     if (isFirst) {
       setIsFirst(false);
-      console.log(users);
+      console.log(user);
 
-      dispatch(fetchUsers(users));
+      dispatch(fetchUsers(user));
     }
-  }, [dispatch, isFirst, users]);
+  }, [dispatch, isFirst, user]);
 
   return (
     console.log("success"),

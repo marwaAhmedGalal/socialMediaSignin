@@ -1,5 +1,6 @@
 import { Button } from "antd";
 import styles from "./SocialMediaButtons.module.css";
+import { url } from "../../Services/api";
 
 function SocialMediaButtons({ formType }: { formType: string }) {
   console.log(formType);
@@ -8,7 +9,7 @@ function SocialMediaButtons({ formType }: { formType: string }) {
       <div className={`d-flex align-items-center flex-column gap-2`}>
         <Button
           className={styles.google}
-          href={`http://192.168.90.164:8000/api/${formType}/google`}
+          href={`${url}/api/${formType}/google`}
           icon={
             <img
               src="/public/images/googleicon.png"
@@ -22,7 +23,7 @@ function SocialMediaButtons({ formType }: { formType: string }) {
 
         <Button
           className={styles.google}
-          href={`http://192.168.90.164:8000/api/${formType}/facebook`}
+          href={`${url}/${formType}/facebook`}
           icon={
             <img
               src="/public/images/facebookicon.png"

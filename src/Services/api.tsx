@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // get data by getServerSideProps
-const url = "http://192.168.90.164:8000";
+export const url = "http://192.168.80.164:8000";
 
 const defaultOptions = {
   baseURL: `${url}/api/`,
